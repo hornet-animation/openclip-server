@@ -2,6 +2,7 @@ var config = require('./config.js');
 
 var express = require('express');
 var exphbs  = require('express-handlebars');
+var bp = require('body-parser');
 
 var os = require('os'); 
 var spawn = require('child_process').spawn;
@@ -17,6 +18,8 @@ var io = require('socket.io')(http);
 // Setup handlebars as engine
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use(bp.urlencoded({extended: false}));
+app.use(bp.json());
 
 // Default endpoint
 app.get('/', function(req, res){
@@ -39,6 +42,11 @@ proc.stderr.on('data', function(data) {
 });
 proc.on('close', function(code, signal) {
 	console.log('Application closed');
+});
+
+app.post('/', (req,res) => {
+	console.log(req.body);
+	res.send('cmd ran')
 });
 
 // Run HTTP server
