@@ -13,6 +13,7 @@
     "expres": "^0.0.5",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
+    "promisify-child-process": "^4.1.1",
     "socket.io": "^2.0.3"
   }
 }
